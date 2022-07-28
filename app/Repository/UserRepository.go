@@ -9,6 +9,7 @@ import (
 type UserRepository interface {
 	GetAll() ([]Users.User, error)
 	GetById(c *gin.Context) (Users.User, error)
+	RegisterUser(user Users.User) (Users.User, error)
 }
 
 type userRepository struct {
@@ -34,6 +35,16 @@ func (r *userRepository) GetById(c *gin.Context) (Users.User, error) {
 	var user Users.User
 
 	err := r.db.Where("id", c.Param("id")).First(&user).Error
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+
+func (r *userRepository) RegisterUser(user Users.User) (Users.User, error) {
+	err := r.db.Create(&user).Error
+
 	if err != nil {
 		return user, err
 	}

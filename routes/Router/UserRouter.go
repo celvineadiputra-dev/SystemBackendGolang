@@ -12,5 +12,6 @@ func UserRouter(db *gorm.DB, api *gin.RouterGroup) {
 	userController := Controllers.NewUserController(userRepository)
 
 	api.GET("/users", userController.GetAllUser)
+	api.POST("/user", userController.RegisterUser)
 	api.GET("/user/:id", userController.GetById)
 }
