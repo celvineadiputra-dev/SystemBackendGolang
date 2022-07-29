@@ -10,5 +10,6 @@ import (
 func UserRouter(db *gorm.DB, api *gin.RouterGroup) {
 	userController := Controllers.NewUserController(db)
 
-	api.POST("/user", Middleware.LogMiddleware(), userController.RegisterUser)
+	api.POST("/register", Middleware.LogMiddleware(), userController.RegisterUser)
+	api.POST("/login", Middleware.LogMiddleware(), userController.Login)
 }
