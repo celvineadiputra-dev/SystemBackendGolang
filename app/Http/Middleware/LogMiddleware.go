@@ -2,7 +2,6 @@ package Middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
 	"log"
 	"os"
 	"time"
@@ -17,11 +16,10 @@ func LogMiddleware() gin.HandlerFunc {
 		defer f.Close()
 
 		log.SetOutput(f)
-		ByteBody, _ := ioutil.ReadAll(context.Request.Body)
-		log.Printf("IP [%s], Access Route : [%s%s], Request : [%s]\n",
+		//ByteBody, _ := ioutil.ReadAll(context.Request.Body)
+		log.Printf("IP [%s], Access Route : [%s%s]\n",
 			context.ClientIP(),
 			context.Request.Host,
-			context.Request.URL.Path,
-			ByteBody)
+			context.Request.URL.Path)
 	}
 }
