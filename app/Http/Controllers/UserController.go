@@ -2,53 +2,33 @@ package Controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+	"mvcGolang/app/Helpers"
 	"mvcGolang/app/Http/Inputs"
 	"mvcGolang/app/Models/Users"
-	"mvcGolang/app/Repository"
 	"time"
 )
 
 type UserController interface {
-	GetAllUser()
-	GetById(c *gin.Context)
-	RegisterUser(c *gin.Context)
+	RegisterUser()
 }
 
 type userController struct {
-	userRepository Repository.UserRepository
+	db *gorm.DB
 }
 
-func NewUserController(userRepository Repository.UserRepository) *userController {
-	return &userController{userRepository}
-}
-
-func (uc *userController) GetAllUser(c *gin.Context) {
-	users, err := uc.userRepository.GetAll()
-
-	if err != nil {
-		c.JSON(500, err.Error())
-	}
-
-	c.JSON(200, users)
-}
-
-func (uc *userController) GetById(c *gin.Context) {
-	user, err := uc.userRepository.GetById(c)
-
-	if err != nil {
-		c.JSON(500, err.Error())
-	}
-
-	c.JSON(200, user)
+func NewUserController(db *gorm.DB) *userController {
+	return &userController{db}
 }
 
 func (uc *userController) RegisterUser(c *gin.Context) {
 	var input Inputs.RegisterUserInput
 
 	err := c.ShouldBindJSON(&input)
-
 	if err != nil {
-		c.JSON(500, err.Error())
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
 	}
 
 	user := Users.User{}
@@ -58,13 +38,13 @@ func (uc *userController) RegisterUser(c *gin.Context) {
 	user.CreatedAt = time.Now()
 	user.UpdatedAt = time.Now()
 
-	c.JSON(200, user)
-
-	newUser, err := uc.userRepository.RegisterUser(user)
-
-	if err != nil {
-		c.JSON(200, err.Error())
+	errCreate := uc.db.Create(&user).Error
+	if errCreate != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
 	}
 
-	c.JSON(200, newUser)
+	response := Helpers.ApiResponse(200, "Successfully register new user", user)
+	c.JSON(200, response)
 }

@@ -11,6 +11,7 @@ func Api(db *gorm.DB) *gin.Engine {
 	api := route.Group("api/v1")
 
 	Router.UserRouter(db, api)
+	Router.PostRouter(db, api)
 
 	return route
 }

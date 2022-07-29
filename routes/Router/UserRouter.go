@@ -4,14 +4,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"mvcGolang/app/Http/Controllers"
-	"mvcGolang/app/Repository"
+	"mvcGolang/app/Http/Middleware"
 )
 
 func UserRouter(db *gorm.DB, api *gin.RouterGroup) {
-	userRepository := Repository.NewRepository(db)
-	userController := Controllers.NewUserController(userRepository)
+	userController := Controllers.NewUserController(db)
 
-	api.GET("/users", userController.GetAllUser)
-	api.POST("/user", userController.RegisterUser)
-	api.GET("/user/:id", userController.GetById)
+	api.POST("/user", Middleware.LogMiddleware(), userController.RegisterUser)
 }
