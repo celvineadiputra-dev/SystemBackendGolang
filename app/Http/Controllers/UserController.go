@@ -5,11 +5,15 @@ import (
 	"gorm.io/gorm"
 	"mvcGolang/app/Helpers"
 	"mvcGolang/app/Http/Inputs"
+	"mvcGolang/app/Http/Responses"
 	"mvcGolang/app/Models/Users"
+	"mvcGolang/config"
 )
 
 type UserController interface {
 	RegisterUser()
+	Login()
+	CheckEmail() bool
 }
 
 type userController struct {
@@ -33,6 +37,21 @@ func (uc *userController) RegisterUser(c *gin.Context) {
 		return
 	}
 
+	var checkEmail Users.User
+	checkEmailError := uc.db.Where("email", input.Email).Find(&checkEmail).Error
+
+	if checkEmailError != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	if checkEmail.Email == input.Email {
+		response := Helpers.ApiResponse(500, "Email already exits", nil)
+		c.JSON(500, response)
+		return
+	}
+
 	user := Users.User{}
 	user.Name = input.Name
 	user.Email = input.Email
@@ -46,7 +65,17 @@ func (uc *userController) RegisterUser(c *gin.Context) {
 		return
 	}
 
-	response := Helpers.ApiResponse(200, "Successfully register new user", user)
+	token, tokenErr := config.GenerateToken(user.Email, user.ID)
+
+	if tokenErr != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	userResponse := Responses.UserFormat(user, token)
+
+	response := Helpers.ApiResponse(200, "Successfully register new user", userResponse)
 	c.JSON(200, response)
 }
 
@@ -58,6 +87,7 @@ func (uc *userController) Login(c *gin.Context) {
 	if err != nil {
 		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
 		c.JSON(500, response)
+		return
 	}
 
 	var user Users.User
@@ -83,6 +113,42 @@ func (uc *userController) Login(c *gin.Context) {
 		return
 	}
 
-	response := Helpers.ApiResponse(200, "Success", user)
+	token, tokenErr := config.GenerateToken(user.Email, user.ID)
+	if tokenErr != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	userFormat := Responses.UserFormat(user, token)
+
+	response := Helpers.ApiResponse(200, "Success", userFormat)
 	c.JSON(200, response)
+}
+
+func (uc *userController) CheckEmail(c *gin.Context) bool {
+	var input Inputs.CheckEmail
+
+	err := c.ShouldBind(&input)
+
+	if err != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return false
+	}
+
+	var user Users.User
+	checkUserEmailError := uc.db.Where("email = ?", input.Email).Find(&user).Error
+
+	if checkUserEmailError != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return false
+	}
+
+	if user.ID == 0 {
+		return true
+	}
+
+	return false
 }
