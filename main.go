@@ -7,6 +7,7 @@ import (
 
 func main() {
 	var db = bootstrap.Start()
+	bootstrap.MigrateDatabase()
 	var route = routes.Api(db)
 
 	route.Run("localhost:5120")
