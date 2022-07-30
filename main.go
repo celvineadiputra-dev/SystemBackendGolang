@@ -6,8 +6,9 @@ import (
 )
 
 func main() {
+	//gin.SetMode(gin.ReleaseMode) // for release project
 	var db = bootstrap.Start()
-	//bootstrap.MigrateDatabase()
+	//bootstrap.MigrateDatabase() // for migrate and seed database
 	var route = routes.Api(db)
 
 	route.Run("localhost:5120")
