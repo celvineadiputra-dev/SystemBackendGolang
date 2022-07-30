@@ -6,7 +6,6 @@ import (
 	"mvcGolang/app/Helpers"
 	"mvcGolang/app/Http/Inputs"
 	"mvcGolang/app/Models/Users"
-	"time"
 )
 
 type UserController interface {
@@ -38,8 +37,7 @@ func (uc *userController) RegisterUser(c *gin.Context) {
 	user.Name = input.Name
 	user.Email = input.Email
 	user.Password = Helpers.HashPassword(input.Password)
-	user.CreatedAt = time.Now()
-	user.UpdatedAt = time.Now()
+	user.RoleId = 1
 
 	errCreate := uc.db.Create(&user).Error
 	if errCreate != nil {
