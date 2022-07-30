@@ -26,7 +26,10 @@ func (uc *userController) RegisterUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
-		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		errors := Helpers.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := Helpers.ApiResponse(500, "Validation Error", errorMessage)
 		c.JSON(500, response)
 		return
 	}

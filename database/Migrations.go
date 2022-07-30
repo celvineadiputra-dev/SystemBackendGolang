@@ -16,4 +16,6 @@ func Migrate() {
 	config.Database().Model(&Campaigns.Campaign{})
 	config.Database().Model(&Campaigns.CampaignImage{})
 	config.Database().Model(&Transactions.Transaction{})
+
+	RoleSeed(config.Database())
 }

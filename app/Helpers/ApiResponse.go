@@ -1,5 +1,11 @@
 package Helpers
 
+import (
+	"errors"
+	"fmt"
+	"github.com/go-playground/validator/v10"
+)
+
 type Meta struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
@@ -22,4 +28,22 @@ func ApiResponse(code int, message string, data interface{}) Response {
 	}
 
 	return jsonResponse
+}
+
+func FormatValidationError(err error) map[string]string {
+	var verr validator.ValidationErrors
+
+	errs := make(map[string]string)
+	if errors.As(err, &verr) {
+
+		for _, f := range verr {
+			err := f.ActualTag()
+			if f.Param() != "" {
+				err = fmt.Sprintf("%s=%s", err, f.Param())
+			}
+			errs[f.Field()] = err
+		}
+
+	}
+	return errs
 }
