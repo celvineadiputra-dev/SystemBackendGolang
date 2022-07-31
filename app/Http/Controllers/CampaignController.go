@@ -98,3 +98,54 @@ func (cc *campaignController) Store(c *gin.Context) {
 	response := Helpers.ApiResponse(200, "Success add new campaign", nil)
 	c.JSON(200, response)
 }
+
+func (cc *campaignController) Update(c *gin.Context) {
+	var input Inputs.UpdateCampaign
+
+	err := c.ShouldBindJSON(&input)
+
+	if err != nil {
+		errors := Helpers.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := Helpers.ApiResponse(500, "Validation Error", errorMessage)
+		c.JSON(500, response)
+		return
+	}
+
+	var campaign Campaigns.Campaign
+
+	id := Helpers.Decrypt(c.Param("id"))
+	err = cc.db.Where("id = ?", id).Find(&campaign).Error
+	if err != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	if campaign.ID == 0 {
+		response := Helpers.ApiResponse(404, "Campaign Not Found", nil)
+		c.JSON(404, response)
+		return
+	}
+
+	if campaign.UserId != c.MustGet("currentUser").(Users.User).ID {
+		response := Helpers.ApiResponse(402, "Not an owner of the campaign", nil)
+		c.JSON(402, response)
+		return
+	}
+
+	campaign.ShortDesc = input.ShortDesc
+	campaign.Desc = input.Desc
+	errUpdate := cc.db.Save(&campaign).Error
+
+	if errUpdate != nil {
+		response := Helpers.ApiResponse(402, "Update Failed", nil)
+		c.JSON(402, response)
+		return
+	}
+
+	campaignFormat := Responses.CampaignSingleFormat(campaign)
+	response := Helpers.ApiResponse(200, "Update Successfully", campaignFormat)
+	c.JSON(200, response)
+}
