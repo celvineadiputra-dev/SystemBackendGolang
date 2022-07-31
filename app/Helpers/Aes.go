@@ -4,7 +4,6 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
-	"fmt"
 )
 
 const sc string = "AesT1h1i1n1g_+=g2n2i2h2t"
@@ -24,7 +23,6 @@ func decodeBase64(s string) []byte {
 }
 
 func Encrypt(text string) string {
-	fmt.Println(text)
 	block, err := aes.NewCipher([]byte(sc))
 	if err != nil {
 		panic(err)
@@ -37,7 +35,6 @@ func Encrypt(text string) string {
 }
 
 func Decrypt(text string) string {
-	fmt.Println(text)
 	block, err := aes.NewCipher([]byte(sc))
 	if err != nil {
 		panic(err)

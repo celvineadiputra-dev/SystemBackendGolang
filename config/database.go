@@ -13,7 +13,7 @@ func Database() *gorm.DB {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-
+	
 	log.Println("Success Connected to database server")
 
 	return db

@@ -46,7 +46,7 @@ func customMessage(f validator.FieldError) string {
 	} else if f.ActualTag() == "eqfield" {
 		return "Value not equal with " + f.Param()
 	} else if f.ActualTag() == "min" {
-		return "Minimum Character " + f.Param()
+		return "Minimum " + f.Param()
 	}
 
 	return f.ActualTag()
@@ -58,17 +58,10 @@ func FormatValidationError(err error) map[string]string {
 	errs := make(map[string]string)
 	if errors.As(err, &verr) {
 		for _, f := range verr {
-			println(f.Error())
-			println(f.ActualTag())
-			println(f.Param())
-			println(f.Field())
 			err := f.ActualTag()
 			if f.Param() != "" {
 				err = fmt.Sprintf("%s=%s", err, f.Param())
 			}
-			println("XXX")
-			println(f.ActualTag())
-			println("XXX")
 			errs[f.Field()] = customMessage(f)
 		}
 	}

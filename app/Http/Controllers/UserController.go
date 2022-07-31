@@ -57,6 +57,7 @@ func (uc *userController) RegisterUser(c *gin.Context) {
 	user.Email = input.Email
 	user.Password = Helpers.HashPassword(input.Password)
 	user.RoleId = 1
+	user.Occupation = input.Occupation
 
 	errCreate := uc.db.Create(&user).Error
 	if errCreate != nil {

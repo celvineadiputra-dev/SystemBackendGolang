@@ -8,6 +8,7 @@ import (
 
 type Campaign struct {
 	ID             int             `json:"id"`
+	Name           string          `json:"name"`
 	UserId         int             `json:"user_id"`
 	User           Users.User      `gorm:"foreignKey:UserId"`
 	ShortDesc      string          `gorm:"size:100" json:"short_desc"`

@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"github.com/golang-jwt/jwt/v4"
 	"mvcGolang/app/Helpers"
 	"strconv"
@@ -9,6 +10,7 @@ import (
 
 type Token interface {
 	GenerateToken(email string, userId int) (string, error)
+	ValidateToken(token string) (*jwt.Token, error)
 }
 
 func GenerateToken(email string, userId int) (string, error) {
@@ -25,4 +27,22 @@ func GenerateToken(email string, userId int) (string, error) {
 	}
 
 	return signedToken, nil
+}
+
+func ValidateToken(encodedToken string) (*jwt.Token, error) {
+	token, err := jwt.Parse(encodedToken, func(token *jwt.Token) (interface{}, error) {
+		_, ok := token.Method.(*jwt.SigningMethodHMAC)
+
+		if !ok {
+			return nil, errors.New("invalid token")
+		}
+
+		return []byte("T77H1nG25_0o0L07_000+"), nil
+	})
+
+	if err != nil {
+		return token, nil
+	}
+
+	return token, nil
 }
