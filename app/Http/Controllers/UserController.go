@@ -86,7 +86,7 @@ func (uc *userController) Login(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 
 	if err != nil {
-		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		response := Helpers.ApiResponse(500, err.Error(), nil)
 		c.JSON(500, response)
 		return
 	}
@@ -95,7 +95,7 @@ func (uc *userController) Login(c *gin.Context) {
 	err = uc.db.Where("email = ?", input.Email).Find(&user).Error
 
 	if err != nil {
-		response := Helpers.ApiResponse(500, "Internal Server error", nil)
+		response := Helpers.ApiResponse(500, "2Internal Server error", nil)
 		c.JSON(500, response)
 		return
 	}
@@ -116,7 +116,7 @@ func (uc *userController) Login(c *gin.Context) {
 
 	token, tokenErr := config.GenerateToken(user.Email, user.ID)
 	if tokenErr != nil {
-		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		response := Helpers.ApiResponse(500, "3Internal Server Error", nil)
 		c.JSON(500, response)
 		return
 	}
@@ -133,7 +133,7 @@ func (uc *userController) CheckEmail(c *gin.Context) bool {
 	err := c.ShouldBind(&input)
 
 	if err != nil {
-		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		response := Helpers.ApiResponse(500, "4Internal Server Error", nil)
 		c.JSON(500, response)
 		return false
 	}
@@ -142,7 +142,7 @@ func (uc *userController) CheckEmail(c *gin.Context) bool {
 	checkUserEmailError := uc.db.Where("email = ?", input.Email).Find(&user).Error
 
 	if checkUserEmailError != nil {
-		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		response := Helpers.ApiResponse(500, "5Internal Server Error", nil)
 		c.JSON(500, response)
 		return false
 	}
