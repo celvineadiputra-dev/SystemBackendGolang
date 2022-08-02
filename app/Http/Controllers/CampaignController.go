@@ -149,3 +149,34 @@ func (cc *campaignController) Update(c *gin.Context) {
 	response := Helpers.ApiResponse(200, "Update Successfully", campaignFormat)
 	c.JSON(200, response)
 }
+
+func (cc *campaignController) Destroy(c *gin.Context) {
+	id := Helpers.Decrypt(c.Param("id"))
+	userId := c.MustGet("currentUser").(Users.User).ID
+
+	var campaign Campaigns.Campaign
+	err := cc.db.Where("id = ? and user_id = ?", id, userId).Find(&campaign).Error
+
+	if err != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	if campaign.ID == 0 {
+		response := Helpers.ApiResponse(404, "Campaign Not Found", nil)
+		c.JSON(404, response)
+		return
+	}
+
+	errDelete := cc.db.Delete(&campaign).Error
+
+	if errDelete != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	response := Helpers.ApiResponse(200, "Success Delete Campaign", nil)
+	c.JSON(200, response)
+}

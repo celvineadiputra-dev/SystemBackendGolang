@@ -14,4 +14,5 @@ func CampaignRouter(db *gorm.DB, api *gin.RouterGroup) {
 	api.GET("/campaign/:id", Middleware.AuthMiddleware(db), campaignController.Show)
 	api.POST("/campaign", Middleware.AuthMiddleware(db), campaignController.Store)
 	api.PUT("/campaign/:id", Middleware.AuthMiddleware(db), campaignController.Update)
+	api.DELETE("/campaign/:id", Middleware.AuthMiddleware(db), campaignController.Destroy)
 }
