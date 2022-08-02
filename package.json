@@ -1,0 +1,24 @@
+{
+  "name": "dir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "doc": "p2o ./api/api_collection.json -f ./api/documentaion.yml",
+    "watch" : "nodemon --exec go run main.go"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celvineadiputra-dev/SystemBackendGolang.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/celvineadiputra-dev/SystemBackendGolang/issues"
+  },
+  "homepage": "https://github.com/celvineadiputra-dev/SystemBackendGolang#readme",
+  "dependencies": {
+    "nodemon": "^2.0.19",
+    "postman-to-openapi": "^2.4.1"
+  }
+}

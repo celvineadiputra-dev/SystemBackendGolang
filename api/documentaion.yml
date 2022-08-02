@@ -1,0 +1,523 @@
+openapi: 3.0.0
+info:
+  title: CrowdFunding
+  version: 1.0.0
+servers:
+  - url: http://localhost:5120
+tags:
+  - name: Auth
+  - name: Campaign
+paths:
+  /api/v1/register:
+    post:
+      tags:
+        - Auth
+      summary: Register New User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Celvine
+                email: Celvine@gmail.com
+                occupation: Test occupation
+                password: '12345678'
+                confirmPassword: '12345678'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 13:56:37 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '318'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: Successfully register new user
+                data:
+                  id: zg==
+                  name: Celvine
+                  email: Celvine@gmail.com
+                  token: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NTkzOTcsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.ZYBZeMzz9lO4D68PUzWZlzg3YZg--pZXU4Hb0IDMkI0
+        '500':
+          description: Internal Server Error
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:10:11 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '65'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 500
+                  message: Email already exits
+                data: null
+  /api/v1/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: Celvine@gmail.com
+                password: '12345678'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:12:10 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '295'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: Success
+                data:
+                  id: zg==
+                  name: Celvine
+                  email: Celvine@gmail.com
+                  token: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjAzMzAsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.RqC3bK85sIvZRdxkzFzTFLH8abSqMpqdg32Qd6GjZBw
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:12:36 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '80'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 401
+                  message: Password and email doesn't correct
+                data: null
+  /api/v1/campaigns:
+    get:
+      tags:
+        - Campaign
+      summary: Get All
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:19:27 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '432'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: List of campaigns
+                data:
+                  - id: zg==
+                    name: Test Campaign
+                    short_desc: Hello test
+                    desc: Test Description length
+                    goal_amount: 100000
+                    current_amount: 0
+                    perks: Campaign On
+                    backer_count: 0
+                    slug: test-campaign
+                    created_at: '2022-08-02T21:18:52.136+07:00'
+                    updated_at: '2022-08-02T21:18:52.136+07:00'
+                    deleted_at: null
+                    user:
+                      id: zg==
+                      name: Celvine
+                      email: Celvine@gmail.com
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:15:59 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '58'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 401
+                  message: Unauthorized
+                data: null
+  /api/v1/campaign:
+    post:
+      tags:
+        - Campaign
+      summary: Add Campaign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Test Campaign
+                short_desc: Hello test
+                desc: Test Description length
+                goal_amount: 100000
+                perks: Campaign On
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:18:52 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '70'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: Success add new campaign
+                data: null
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:15:59 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '58'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 401
+                  message: Unauthorized
+                data: null
+  /api/v1/campaign/zA==:
+    get:
+      tags:
+        - Campaign
+      summary: Get By Id
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:26:21 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '421'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: Camapign
+                data:
+                  id: zg==
+                  name: Test Campaign
+                  short_desc: Hello test
+                  desc: Test Description length
+                  goal_amount: 100000
+                  current_amount: 0
+                  perks: Campaign On
+                  backer_count: 0
+                  slug: test-campaign
+                  created_at: '2022-08-02T21:18:52.136+07:00'
+                  updated_at: '2022-08-02T21:18:52.136+07:00'
+                  deleted_at: null
+                  user:
+                    id: zg==
+                    name: Celvine
+                    email: Celvine@gmail.com
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:26:55 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '64'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 404
+                  message: Campaign Not Found
+                data: null
+  /api/v1/campaign/zg==:
+    put:
+      tags:
+        - Campaign
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                short_desc: Hello test update
+                desc: Test Description length update
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:33:26 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '420'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: Update Successfully
+                data:
+                  id: zg==
+                  name: Test Campaign
+                  short_desc: Hello test update
+                  desc: Test Description length update
+                  goal_amount: 100000
+                  current_amount: 0
+                  perks: Campaign On
+                  backer_count: 0
+                  slug: test-campaign
+                  created_at: '2022-08-02T21:18:52.136+07:00'
+                  updated_at: '2022-08-02T21:33:26.5+07:00'
+                  deleted_at: null
+                  user:
+                    id: zw==
+                    name: ''
+                    email: ''
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:32:56 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '64'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 404
+                  message: Campaign Not Found
+                data: null
+    delete:
+      tags:
+        - Campaign
+      summary: Delete
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:34:46 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '69'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 200
+                  message: Success Delete Campaign
+                data: null
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                example: Tue, 02 Aug 2022 14:34:13 GMT
+            Content-Length:
+              schema:
+                type: integer
+                example: '64'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  code: 404
+                  message: Campaign Not Found
+                data: null

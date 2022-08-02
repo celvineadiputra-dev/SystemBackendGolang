@@ -1,0 +1,918 @@
+{
+	"info": {
+		"_postman_id": "38c71ef7-fbd2-4b26-87a3-b393f8bb2ab8",
+		"name": "CrowdFunding",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21381415"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Celvine\",\r\n    \"email\": \"Celvine@gmail.com\",\r\n    \"occupation\" : \"Test occupation\",\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\" : \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5120/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Celvine\",\r\n    \"email\": \"Celvine@gmail.com\",\r\n    \"occupation\" : \"Test occupation\",\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 13:56:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "318"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Successfully register new user\"\n    },\n    \"data\": {\n        \"id\": \"zg==\",\n        \"name\": \"Celvine\",\n        \"email\": \"Celvine@gmail.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NTkzOTcsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.ZYBZeMzz9lO4D68PUzWZlzg3YZg--pZXU4Hb0IDMkI0\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Celvine\",\r\n    \"email\": \"Celvine@gmail.com\",\r\n    \"occupation\" : \"Test occupation\",\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:10:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 500,\n        \"message\": \"Email already exits\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"Celvine@gmail.com\",\r\n    \"password\" : \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5120/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"Celvine@gmail.com\",\r\n    \"password\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:12:10 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "295"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Success\"\n    },\n    \"data\": {\n        \"id\": \"zg==\",\n        \"name\": \"Celvine\",\n        \"email\": \"Celvine@gmail.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjAzMzAsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.RqC3bK85sIvZRdxkzFzTFLH8abSqMpqdg32Qd6GjZBw\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"Celvine@gmail.com\",\r\n    \"password\" : \"123456781\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:12:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 401,\n        \"message\": \"Password and email doesn't correct\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Campaign",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5120/api/v1/campaigns",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"campaigns"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRd",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaigns",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaigns"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:15:59 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 401,\n        \"message\": \"Unauthorized\"\n    },\n    \"data\": null\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaigns",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaigns"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:19:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "432"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"List of campaigns\"\n    },\n    \"data\": [\n        {\n            \"id\": \"zg==\",\n            \"name\": \"Test Campaign\",\n            \"short_desc\": \"Hello test\",\n            \"desc\": \"Test Description length\",\n            \"goal_amount\": 100000,\n            \"current_amount\": 0,\n            \"perks\": \"Campaign On\",\n            \"backer_count\": 0,\n            \"slug\": \"test-campaign\",\n            \"created_at\": \"2022-08-02T21:18:52.136+07:00\",\n            \"updated_at\": \"2022-08-02T21:18:52.136+07:00\",\n            \"deleted_at\": null,\n            \"user\": {\n                \"id\": \"zg==\",\n                \"name\": \"Celvine\",\n                \"email\": \"Celvine@gmail.com\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Campaign",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Test Campaign\",\r\n    \"short_desc\" : \"Hello test\",\r\n    \"desc\" : \"Test Description length\",\r\n    \"goal_amount\" : 100000,\r\n    \"perks\" : \"Campaign On\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5120/api/v1/campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"campaign"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRd",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaigns",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaigns"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:15:59 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 401,\n        \"message\": \"Unauthorized\"\n    },\n    \"data\": null\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Test Campaign\",\r\n    \"short_desc\" : \"Hello test\",\r\n    \"desc\" : \"Test Description length\",\r\n    \"goal_amount\" : 100000,\r\n    \"perks\" : \"Campaign On\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:18:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Success add new campaign\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5120/api/v1/campaign/zA==",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"campaign",
+								"zA=="
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign/zg==",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign",
+										"zg=="
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:26:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "421"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Camapign\"\n    },\n    \"data\": {\n        \"id\": \"zg==\",\n        \"name\": \"Test Campaign\",\n        \"short_desc\": \"Hello test\",\n        \"desc\": \"Test Description length\",\n        \"goal_amount\": 100000,\n        \"current_amount\": 0,\n        \"perks\": \"Campaign On\",\n        \"backer_count\": 0,\n        \"slug\": \"test-campaign\",\n        \"created_at\": \"2022-08-02T21:18:52.136+07:00\",\n        \"updated_at\": \"2022-08-02T21:18:52.136+07:00\",\n        \"deleted_at\": null,\n        \"user\": {\n            \"id\": \"zg==\",\n            \"name\": \"Celvine\",\n            \"email\": \"Celvine@gmail.com\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign/zA==",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign",
+										"zA=="
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:26:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 404,\n        \"message\": \"Campaign Not Found\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"short_desc\" : \"Hello test update\",\r\n    \"desc\" : \"Test Description length update\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5120/api/v1/campaign/zg==",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"campaign",
+								"zg=="
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"short_desc\" : \"Hello test update\",\r\n    \"desc\" : \"Test Description length update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign/zA==",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign",
+										"zA=="
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:32:56 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 404,\n        \"message\": \"Campaign Not Found\"\n    },\n    \"data\": null\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"short_desc\" : \"Hello test update\",\r\n    \"desc\" : \"Test Description length update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign/zg==",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign",
+										"zg=="
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:33:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "420"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Update Successfully\"\n    },\n    \"data\": {\n        \"id\": \"zg==\",\n        \"name\": \"Test Campaign\",\n        \"short_desc\": \"Hello test update\",\n        \"desc\": \"Test Description length update\",\n        \"goal_amount\": 100000,\n        \"current_amount\": 0,\n        \"perks\": \"Campaign On\",\n        \"backer_count\": 0,\n        \"slug\": \"test-campaign\",\n        \"created_at\": \"2022-08-02T21:18:52.136+07:00\",\n        \"updated_at\": \"2022-08-02T21:33:26.5+07:00\",\n        \"deleted_at\": null,\n        \"user\": {\n            \"id\": \"zw==\",\n            \"name\": \"\",\n            \"email\": \"\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5120/api/v1/campaign/zg==",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"campaign",
+								"zg=="
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign/zA==",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign",
+										"zA=="
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:34:13 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 404,\n        \"message\": \"Campaign Not Found\"\n    },\n    \"data\": null\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5120/api/v1/campaign/zg==",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5120",
+									"path": [
+										"api",
+										"v1",
+										"campaign",
+										"zg=="
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 02 Aug 2022 14:34:46 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Success Delete Campaign\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
