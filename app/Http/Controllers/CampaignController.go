@@ -1,6 +1,7 @@
 package Controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gosimple/slug"
 	"gorm.io/gorm"
@@ -178,5 +179,89 @@ func (cc *campaignController) Destroy(c *gin.Context) {
 	}
 
 	response := Helpers.ApiResponse(200, "Success Delete Campaign", nil)
+	c.JSON(200, response)
+}
+
+func (cc *campaignController) UploadImage(c *gin.Context) {
+	var input Inputs.UploadCampaignImage
+
+	err := c.ShouldBind(&input)
+	if err != nil {
+		errors := Helpers.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := Helpers.ApiResponse(500, "Validation Error", errorMessage)
+		c.JSON(500, response)
+		return
+	}
+
+	currentUser := c.MustGet("currentUser").(Users.User)
+	input.User = currentUser
+	userId := currentUser.ID
+
+	file, err := c.FormFile("file")
+	if err != nil {
+		errorMessage := gin.H{"is_uploaded": false}
+
+		response := Helpers.ApiResponse(500, "Failed to upload campaign image", errorMessage)
+		c.JSON(500, response)
+		return
+	}
+
+	path := fmt.Sprintf("images/%d-%s", userId, file.Filename)
+	err = c.SaveUploadedFile(file, path)
+	if err != nil {
+		errorMessage := gin.H{"is_uploaded": false}
+
+		response := Helpers.ApiResponse(500, "Failed to upload campaign image", errorMessage)
+		c.JSON(500, response)
+		return
+	}
+
+	input.CampaignId = Helpers.Decrypt(input.CampaignId)
+
+	//cari campaign
+	var campaign Campaigns.Campaign
+	err = cc.db.Where("id = ?", input.CampaignId).Find(&campaign).Error
+	if err != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	if campaign.ID == 0 {
+		response := Helpers.ApiResponse(404, "Campaign Not Found", nil)
+		c.JSON(404, response)
+		return
+	}
+
+	if campaign.UserId != userId {
+		response := Helpers.ApiResponse(402, "Not an owner of the campaign", campaign.ID)
+		c.JSON(402, response)
+		return
+	}
+
+	if input.IsPrimary {
+		err = cc.db.Where("campaign_id = ?", campaign.ID).Model(&Campaigns.CampaignImage{}).Update("is_primary", false).Error
+
+		if err != nil {
+			response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+			c.JSON(500, response)
+			return
+		}
+	}
+
+	campaignImage := Campaigns.CampaignImage{}
+	campaignImage.CampaignId = campaign.ID
+	campaignImage.FileName = path
+	campaignImage.IsPrimary = input.IsPrimary
+	err = cc.db.Create(&campaignImage).Error
+	if err != nil {
+		response := Helpers.ApiResponse(500, "Internal Server Error", nil)
+		c.JSON(500, response)
+		return
+	}
+
+	response := Helpers.ApiResponse(200, "Success add new campaign image", nil)
 	c.JSON(200, response)
 }

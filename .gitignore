@@ -4,3 +4,7 @@ logs/*.txt
 build
 build/*
 node_modules
+images/*.png
+images/*.jpg
+images/*.jpeg
+images/*.webp

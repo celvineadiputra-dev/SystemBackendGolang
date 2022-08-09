@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "38c71ef7-fbd2-4b26-87a3-b393f8bb2ab8",
+		"_postman_id": "c783f94b-951e-4173-a94f-0c947529cb55",
 		"name": "CrowdFunding",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21381415"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -393,7 +392,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NjAwMTk5NzAsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoienJnPSJ9.f8D2UbWkACb5ZXjWMUknOa3DLHp8kHnVoVBZ1LgtAlU",
 								"type": "text"
 							}
 						],
@@ -911,6 +910,59 @@
 							"body": "{\n    \"meta\": {\n        \"code\": 200,\n        \"message\": \"Success Delete Campaign\"\n    },\n    \"data\": null\n}"
 						}
 					]
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NjAwMTk5NzAsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoienJnPSJ9.f8D2UbWkACb5ZXjWMUknOa3DLHp8kHnVoVBZ1LgtAlU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "campaign_id",
+									"value": "zQ==",
+									"type": "default"
+								},
+								{
+									"key": "is_primary",
+									"value": "true",
+									"type": "default"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "BadExample2.png"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5120/api/v1/campaign/uploadImage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5120",
+							"path": [
+								"api",
+								"v1",
+								"campaign",
+								"uploadImage"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

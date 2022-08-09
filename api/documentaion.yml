@@ -243,10 +243,10 @@ paths:
         - name: Authorization
           in: header
           schema:
-            type: number
+            type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NTk0NjA1MzgsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoiemc9PSJ9.8mN_jHK_MnAfcAyjkhzjq5B0Z-t9kiWcgk_Zs4DNRdY
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NjAwMTk5NzAsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoienJnPSJ9.f8D2UbWkACb5ZXjWMUknOa3DLHp8kHnVoVBZ1LgtAlU
       responses:
         '200':
           description: OK
@@ -521,3 +521,36 @@ paths:
                   code: 404
                   message: Campaign Not Found
                 data: null
+  /api/v1/campaign/uploadImage:
+    post:
+      tags:
+        - Campaign
+      summary: Upload Image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                campaign_id:
+                  type: string
+                  example: zQ==
+                is_primary:
+                  type: boolean
+                  example: 'true'
+                file:
+                  type: string
+                  format: binary
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbGltaXQiOjE2NjAwMTk5NzAsImVtYWlsIjoiQ2VsdmluZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoienJnPSJ9.f8D2UbWkACb5ZXjWMUknOa3DLHp8kHnVoVBZ1LgtAlU
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
