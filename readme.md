@@ -1,5 +1,11 @@
-# Golang 🐱‍🚀
-<em>version go1.18.4</em>
+# NEW VERSION GOLANG (2022) 🐱‍🚀
+_version go1.18.4_
+<br/>
+first version in : ( last update : 22 Augusts 2021 )
+```
+https://github.com/celvineadiputra-dev/SystemBackendWithGolang
+```
+
 <hr/>
 
 Required Package : 
